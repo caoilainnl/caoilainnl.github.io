@@ -1,22 +1,10 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+$primary: #a997df;
+$secondary: #0acdff;
+$dark: #031926;
+$info: #ffddd2;
+$light: #87b6a7;
 
-@theme {
-  --dark-color: #031926;
-  --primary-color-light: #ffddd2;
-  --light-color: #87b6a7;
-  --primary-color: ;
-  --secondary-color: ;
-}
-
-.bg-primary {
-  color: white;
-  background-color: #a997df;
-}
-
-.bg-secondary {
-  color: white;
-  background-color: #0acdff;
-}
+@import 'bootstrap/scss/bootstrap';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

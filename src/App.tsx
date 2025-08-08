@@ -1,6 +1,6 @@
 import './App.css';
 import { FaGithub } from 'react-icons/fa';
-import './index.css';
+import { useState } from 'react';
 
 const Card = ({
   title,
@@ -30,7 +30,7 @@ const Card = ({
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary btn-sm mt-auto"
+            className="btn btn-secondary btn-sm mt-auto"
           >
             View On Github
           </a>
@@ -52,7 +52,9 @@ const Section = ({
       <h2 className="display-5 fw-semibold text-dark mb-5 text-center">
         {title}
       </h2>
-      <div className="row g-4">{children}</div>
+      <div className="row align-items-center justify-content-center g-4">
+        {children}
+      </div>
     </section>
   );
 };
@@ -89,10 +91,75 @@ const Education = ({
   );
 };
 
+const CarouselButton = ({
+  onClick,
+  isLeft,
+}: {
+  onClick: () => void;
+  isLeft: boolean;
+}) => (
+  <button
+    onClick={onClick}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      left: isLeft ? '10px' : 'auto',
+      right: isLeft ? 'auto' : '10px',
+      transform: 'translateY(-50%)',
+      backgroundColor: 'rgba(0,0,0,0.5)',
+      color: 'white',
+      border: 'none',
+      borderRadius: '50%',
+      width: '50px',
+      height: '50px',
+      cursor: 'pointer',
+    }}
+  >
+    {isLeft ? '‹' : '›'}
+  </button>
+);
+
+const Carousel = ({ images }: { images: string[] }) => {
+  const [current, setCurrent] = useState(0);
+
+  const nextSlide = () => {
+    setCurrent(prev => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrent(prev => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        maxWidth: '600px',
+        height: '600px',
+        margin: 'auto',
+      }}
+      className="d-flex flex-column align-items-center justify-content-center"
+    >
+      <CarouselButton onClick={prevSlide} isLeft={true} />
+      <img
+        src={images[current]}
+        alt={`Slide ${current}`}
+        style={{
+          width: '100%',
+          height: 'auto',
+          borderRadius: '8px',
+        }}
+      />
+      <CarouselButton onClick={nextSlide} isLeft={false} />
+    </div>
+  );
+};
+
 function App() {
   return (
     <main className="min-vh-100">
-      <header className="bg-light shadow-sm py-5 border-bottom">
+      <header className="bg-secondary shadow-sm py-5 border-bottom shadow-lg">
         <div className="container text-center">
           <h1 className="display-4 fw-bold text-dark mb-3">Caoilainn Lynch</h1>
           <div className="bio">
@@ -103,7 +170,7 @@ function App() {
         </div>
       </header>
 
-      <Section title="Projects">
+      <Section title="Open Source Contributions">
         <Card
           title="Websockets for CCXT GO"
           description="A JavaScript / TypeScript / Python / C# / PHP / GO cryptocurrency trading API with support for more than 100 bitcoin/altcoin exchanges"
@@ -119,6 +186,33 @@ I also improved the rate limiting system by replacing the old leaky bucket metho
           contribution="I implemented GO websocket code transpilation functionality for the CCXT repository, advancing the GO transpilation capabilities to a more complete state"
           link="https://github.com/ccxt/ast-transpiler"
           id="ast-transpiler"
+        />
+      </Section>
+      <Section title="Information Visualization">
+        <Card
+          title="Information Visualization"
+          description="I explored how data visualization can support decision making and reveal insights from complex datasets. I designed custom visual representations tailored to specific analysis tasks, taking into account principles of human perception and cognition. I also used tools like Tableau to apply and modify existing visualizations, evaluated their effectiveness, and iterated on the designs based on both technical criteria and user feedback. The project involved linking data types to appropriate visual forms and using visual analytics techniques to identify patterns in large data sets."
+          contribution="I created Radial Sankey diagrams, bubble charts, choreographs, heatmaps, 3D surface plots, boxenplots, chord diagrams, and more"
+          link="https://github.com/caoilainnl/information-visualization"
+          id="info-vis"
+        />
+        <Carousel
+          images={[
+            './src/assets/synthetic-peaks.png',
+            './src/assets/radial-sankey.png',
+            './src/assets/bubble-chart.png',
+            './src/assets/heatmap.png',
+            './src/assets/boxenplot.png',
+          ]}
+        />
+      </Section>
+      <Section title=" ROS 2 Explorer">
+        <Card
+          title="AST Transpiler"
+          description="I built a ROS 2 autonomous Explorer robot with intelligent systems and safety features. The robot includes collision prevention using LIDAR sensors, auto-docking when battery is low, and autonomous navigation capabilities."
+          contribution="It's built as a modular system with separate packages for core robot control, safety systems, and advanced autonomy features, demonstrating fundamental concepts in autonomous robotics like sensor processing, path planning, and robot control."
+          link="https://github.com/ccxt/ast-transpiler"
+          id="robotics"
         />
       </Section>
       <Section title="Education">
@@ -162,7 +256,7 @@ I also improved the rate limiting system by replacing the old leaky bucket metho
         />
       </Section>
 
-      <footer className="bg-dark text-white py-4 mb-0">
+      <footer className="bg-dark text-white py-4 mb-0 shadow-lg">
         <div className="container text-center">
           <div className="d-flex flex-column align-items-center gap-3">
             <a
