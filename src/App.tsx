@@ -176,7 +176,7 @@ function App() {
           description="A JavaScript / TypeScript / Python / C# / PHP / GO cryptocurrency trading API with support for more than 100 bitcoin/altcoin exchanges"
           contribution="I added functionality to track real-time trading data from over 100 cryptocurrency exchanges. This includes watching OrderBook updates, trade activity, ticker changes, account balances, and order statuses. I built this using Go channels and the Gorilla WebSocket library to handle streaming data efficiently from the exchanges’ websocket APIs. To speed up development, I converted a lot of TypeScript code into Go so the same features could work in both languages.
 
-I also improved the rate limiting system by replacing the old leaky bucket method with a rolling window rate limiter. The old system limited requests to 1 per second, which caused bursts of 60 requests to be sent all at once, then a long wait. The rolling window limiter spreads out requests more evenly, allowing 60 requests per minute without hitting limits. I implemented this new limiter in TypeScript, Python, PHP, C#, and Go, so it works consistently no matter which language or exchange is being used."
+I also improved the rate limiting system by replacing the old leaky bucket method with a rolling window rate limiter. The leaky bucket method would limit 60 requests per minute by sending a request every second, but the rolling window limiter allows sending 60 requests on second 1, and waits a minute before sending more requests."
           link="https://github.com/ccxt/ccxt"
           id="ccxt"
         />
