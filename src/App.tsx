@@ -159,13 +159,43 @@ const Carousel = ({ images }: { images: string[] }) => {
 function App() {
   return (
     <main className="min-vh-100">
-      <header className="bg-secondary shadow-sm py-5 border-bottom shadow-lg">
-        <div className="container text-center">
+      <header className="bg-secondary shadow-sm py-5 border-bottom shadow-lg position-relative overflow-hidden">
+        {/* Background texture overlay */}
+        <div 
+          className="position-absolute w-100 h-100 top-0 start-0"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
+              radial-gradient(circle at 75% 75%, rgba(0,0,0,0.05) 0%, transparent 50%),
+              linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 30%, rgba(255,255,255,0.03) 70%, transparent 70%)
+            `,
+            backgroundSize: '200px 200px, 150px 150px, 100px 100px'
+          }}
+        />
+        
+        {/* Subtle pattern overlay */}
+        <div 
+          className="position-absolute w-100 h-100 top-0 start-0 opacity-10"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}
+        />
+        
+        <div className="container text-center position-relative">
           <h1 className="display-4 fw-bold text-dark mb-3">Caoilainn Lynch</h1>
           <div className="bio">
             <p className="fs-5 text-muted mb-2">
               BSc Computer Science, University of Leeds
             </p>
+            <a 
+              href="/src/assets/CV.pdf" 
+              download="Caoilainn_Lynch_CV.pdf"
+              className="btn btn-dark btn-sm mt-3 p-2"
+            >
+              <i className="bi bi-download me-2"></i>
+              Download CV 
+            </a>
           </div>
         </div>
       </header>
