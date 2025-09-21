@@ -12,8 +12,8 @@ const Section = ({
   children: React.ReactNode;
 }) => {
   return (
-    <section className="container text-white py-5">
-      <h2 className="display-5 fw-semibold mb-5 text-center">
+    <section className="container text-dark py-5">
+      <h2 className="display-5 fw-semibold text-dark mb-5 text-center">
         {title}
       </h2>
       <div className="row align-items-center justify-content-center g-4">
@@ -207,9 +207,9 @@ function App() {
           ]}
         />
       </Section>
-      <Section title=" ROS 2 Explorer">
+      <Section title="ROS 2 Explorer">
         <Card
-          title="AST Transpiler"
+          title="ROS 2 Explorer"
           description="I built a ROS 2 autonomous Explorer robot with intelligent systems and safety features. The robot includes collision prevention using LIDAR sensors, auto-docking when battery is low, and autonomous navigation capabilities."
           contribution="It's built as a modular system with separate packages for core robot control, safety systems, and advanced autonomy features, demonstrating fundamental concepts in autonomous robotics like sensor processing, path planning, and robot control."
           link="https://github.com/ccxt/ast-transpiler"

@@ -28,9 +28,9 @@ export default ({
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="btn btn-secondary btn-sm mt-auto"
+        className="btn btn-secondary mt-auto"
       >
-        View On Github
+        Github
       </a>
     </div>
   </div>
