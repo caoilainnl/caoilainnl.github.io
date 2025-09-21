@@ -1,44 +1,8 @@
 import './App.css';
 import { FaGithub } from 'react-icons/fa';
 import { useState } from 'react';
+import Card from './components/Card2';
 
-const Card = ({
-  title,
-  description,
-  contribution,
-  link,
-  id,
-}: {
-  title: string;
-  description: string;
-  contribution?: string;
-  link: string;
-  id: string;
-}) => {
-  return (
-    <div className="col-md-6">
-      <div id={id} className="card h-100 shadow-sm border-0">
-        <div className="card-body">
-          <h3 className="card-title h5 fw-semibold text-dark mb-3">{title}</h3>
-          <p className="card-text text-muted mb-4">{description}</p>
-          {contribution && (
-            <div className="mb-4">
-              <p className="small mb-0">{contribution}</p>
-            </div>
-          )}
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-secondary btn-sm mt-auto"
-          >
-            View On Github
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Section = ({
   title,
@@ -48,8 +12,8 @@ const Section = ({
   children: React.ReactNode;
 }) => {
   return (
-    <section className="container py-5">
-      <h2 className="display-5 fw-semibold text-dark mb-5 text-center">
+    <section className="container text-white py-5">
+      <h2 className="display-5 fw-semibold mb-5 text-center">
         {title}
       </h2>
       <div className="row align-items-center justify-content-center g-4">
@@ -71,9 +35,9 @@ const Education = ({
   return (
     <div className="col-12">
       <div className="card h-100 shadow-sm border-0">
-        <div className="card-body">
-          <h3 className="card-title h5 fw-semibold text-dark mb-3">{degree}</h3>
-          <p className="card-text text-muted mb-4">{university}</p>
+        <div className="card-body z-index-3 text-white">
+          <h3 className="card-title h5 fw-semibold mb-3">{degree}</h3>
+          <p className="card-text mb-4">{university}</p>
 
           <div className="mb-4">
             <h4 className="h6 fw-medium text-dark mb-3">Key Courses</h4>
@@ -159,9 +123,9 @@ const Carousel = ({ images }: { images: string[] }) => {
 function App() {
   return (
     <main className="min-vh-100">
-      <header className="bg-secondary shadow-sm py-5 border-bottom shadow-lg position-relative overflow-hidden">
+      <header className="bg-dark shadow-sm py-5 border-bottom shadow-lg position-relative overflow-hidden">
         {/* Background texture overlay */}
-        <div 
+        <div
           className="position-absolute w-100 h-100 top-0 start-0"
           style={{
             backgroundImage: `
@@ -172,51 +136,57 @@ function App() {
             backgroundSize: '200px 200px, 150px 150px, 100px 100px'
           }}
         />
-        
+
         {/* Subtle pattern overlay */}
-        <div 
+        <div
           className="position-absolute w-100 h-100 top-0 start-0 opacity-10"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
             backgroundSize: '60px 60px'
           }}
         />
-        
+
         <div className="container text-center position-relative">
-          <h1 className="display-4 fw-bold text-dark mb-3">Caoilainn Lynch</h1>
+          <h1 className="display-4 fw-bold text-white mb-3">Caoilainn Lynch</h1>
           <div className="bio">
-            <p className="fs-5 text-muted mb-2">
+            <p className="fs-5 text-white mb-2">
               BSc Computer Science, University of Leeds
             </p>
-            <a 
-              href="/src/assets/CV.pdf" 
+            <a
+              href="/src/assets/CV.pdf"
               download="Caoilainn_Lynch_CV.pdf"
-              className="btn btn-dark btn-sm mt-3 p-2"
+              className="btn btn-secondary btn-sm mt-3 p-2"
             >
               <i className="bi bi-download me-2"></i>
-              Download CV 
+              Download CV ⁣
             </a>
           </div>
         </div>
       </header>
 
       <Section title="Open Source Contributions">
-        <Card
-          title="Websockets for CCXT GO"
-          description="A JavaScript / TypeScript / Python / C# / PHP / GO cryptocurrency trading API with support for more than 100 bitcoin/altcoin exchanges"
-          contribution="I added functionality to track real-time trading data from over 100 cryptocurrency exchanges. This includes watching OrderBook updates, trade activity, ticker changes, account balances, and order statuses. I built this using Go channels and the Gorilla WebSocket library to handle streaming data efficiently from the exchanges’ websocket APIs. To speed up development, I converted a lot of TypeScript code into Go so the same features could work in both languages.
+        <div className='d-flex flex-md-row'>
+          <div className="p-3 col-md-6">
+            <Card
+              title="Websockets for CCXT GO"
+              description="A JavaScript / TypeScript / Python / C# / PHP / GO cryptocurrency trading API with support for more than 100 bitcoin/altcoin exchanges"
+              contribution="I added functionality to track real-time trading data from over 100 cryptocurrency exchanges. This includes watching OrderBook updates, trade activity, ticker changes, account balances, and order statuses. I built this using Go channels and the Gorilla WebSocket library to handle streaming data efficiently from the exchanges’ websocket APIs. To speed up development, I converted a lot of TypeScript code into Go so the same features could work in both languages.
 
-I also improved the rate limiting system by replacing the old leaky bucket method with a rolling window rate limiter. The leaky bucket method would limit 60 requests per minute by sending a request every second, but the rolling window limiter allows sending 60 requests on second 1, and waits a minute before sending more requests."
-          link="https://github.com/ccxt/ccxt"
-          id="ccxt"
-        />
-        <Card
-          title="AST Transpiler"
-          description="AST Transpiler that converts Typescript into different languages (PHP, Python, C#, Go) "
-          contribution="I implemented GO websocket code transpilation functionality for the CCXT repository, advancing the GO transpilation capabilities to a more complete state"
-          link="https://github.com/ccxt/ast-transpiler"
-          id="ast-transpiler"
-        />
+    I also improved the rate limiting system by replacing the old leaky bucket method with a rolling window rate limiter. The leaky bucket method would limit 60 requests per minute by sending a request every second, but the rolling window limiter allows sending 60 requests on second 1, and waits a minute before sending more requests."
+              link="https://github.com/ccxt/ccxt"
+              id="ccxt"
+            />
+          </div>
+          <div className='p-3 col-md-6'>
+            <Card
+              title="AST Transpiler"
+              description="AST Transpiler that converts Typescript into different languages (PHP, Python, C#, Go) "
+              contribution="I implemented GO websocket code transpilation functionality for the CCXT repository, advancing the GO transpilation capabilities to a more complete state"
+              link="https://github.com/ccxt/ast-transpiler"
+              id="ast-transpiler"
+            />
+          </div>
+        </div>
       </Section>
       <Section title="Information Visualization">
         <Card
@@ -225,6 +195,7 @@ I also improved the rate limiting system by replacing the old leaky bucket metho
           contribution="I created Radial Sankey diagrams, bubble charts, choreographs, heatmaps, 3D surface plots, boxenplots, chord diagrams, and more"
           link="https://github.com/caoilainnl/information-visualization"
           id="info-vis"
+          className='col-md-6'
         />
         <Carousel
           images={[
@@ -243,6 +214,7 @@ I also improved the rate limiting system by replacing the old leaky bucket metho
           contribution="It's built as a modular system with separate packages for core robot control, safety systems, and advanced autonomy features, demonstrating fundamental concepts in autonomous robotics like sensor processing, path planning, and robot control."
           link="https://github.com/ccxt/ast-transpiler"
           id="robotics"
+          className='col-md-6'
         />
       </Section>
       <Section title="Education">

@@ -1,0 +1,73 @@
+.card {
+  background: #07182e;
+  position: relative;
+  display: inline-flex;   /* shrink/grow with content */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;          /* internal spacing */
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+  min-width: 180px;       /* optional safety: don’t collapse too much */
+  min-height: 120px;
+}
+
+.card p {
+  z-index: 2;
+  color: white;
+  
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+  margin: 0.5rem 0; /* spacing between multiple <p> */
+}
+
+/* Rotating background with gradient and glow */
+.card::before {
+  content: "";
+  position: absolute;
+  width: 200%; /* extra large so it always covers */
+  height: 200%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    #00c3ff 0%,
+    #7b2ff7 25%,
+    #00f2c3 55%,
+    #ffe600 85%,
+    #00c3ff 100%
+  );
+  animation: rotateAnim 5s linear infinite;
+  filter: blur(10px) brightness(1.2);
+  z-index: 0;
+}
+
+/* Inner mask */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 4px;            /* keeps inner panel slightly smaller */
+  background: #07182e;
+  border-radius: 16px;
+  z-index: 1;
+  box-shadow: inset 0 0 20px rgba(0, 183, 255, 0.1);
+}
+
+/* Optional radial gradient overlay */
+.card .gradient-overlay {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, transparent 40%, #07182e 80%);
+  z-index: 1;
+}
+
+/* Rotating animation */
+@keyframes rotateAnim {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+
+.z-index-3 {
+    z-index: 3;
+}
